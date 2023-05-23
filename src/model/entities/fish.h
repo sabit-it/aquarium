@@ -23,19 +23,18 @@ struct fish {
             std::uniform_int_distribution<> dis_y(100, 780);
             y = dis_y(gen);
 
+            std::uniform_int_distribution<> fish_type(1, 2);
+            type = fish_type(gen);
         }
     }
 
     int path_count = 0;
-    std::string path;
 
     float hungry_level = 60;
     int age = 0;
     float x, y;
 
-    int direction = 1;
 
-    int speed = FISH_SPEED;
     int type = 1;
 
 
@@ -53,7 +52,6 @@ struct fish {
 
     bool is_alive = true;
 
-    float angle_difference;
 
     std::chrono::time_point<std::chrono::steady_clock> start;
     std::chrono::time_point<std::chrono::steady_clock> life_start;

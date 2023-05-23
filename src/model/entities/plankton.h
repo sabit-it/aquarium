@@ -21,17 +21,24 @@ struct plankton {
     float x, y;
     float move_x, move_y;
 
+    int type = 1;
+
     int path_count;
-    std::string path;
+
     int age;
 
     bool is_alive = true;
 
+    bool destination_right;
+    float angle_destination;
+    float angle;
+
     std::chrono::time_point<std::chrono::steady_clock> start;
     std::chrono::time_point<std::chrono::steady_clock> life_start;
 
-    void move(std::vector<fish>& fishes);
+    void move();
 
-    bool find_fish(std::vector<fish>& fishes);
-
+    void set_rotation();
 };
+
+void move_planktons(std::vector<plankton>& planktons);

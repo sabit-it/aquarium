@@ -1,5 +1,6 @@
 #include "../model/entities/fish.h"
 #include "../model/entities/predator.h"
+#include "../model/additionaly_functionality/path_generate.h"
 #include "show_functions.h"
 #include <SFML/Graphics.hpp>
 
@@ -24,6 +25,7 @@ void show_predators(std::vector<predator>& predators, RenderWindow& window){
         } else {
             predator_image.loadFromFile(FIRST_TYPE_PREDATOR_LEFT);
         }
+
         predator_texture.loadFromImage(predator_image);
         predator_sprite.setTexture(predator_texture);
 
@@ -43,23 +45,27 @@ void show_predators(std::vector<predator>& predators, RenderWindow& window){
 
 
 void show_fish(std::vector<fish>& fishes, RenderWindow& window){
-    sf::Image fish_image;
-    Texture fish_texture;
     Sprite fish_sprite;
+    Texture fish_texture;
 
     for(auto& f: fishes) {
         if(!f.is_alive){
             continue;
         }
-        if(f.destination_right){
-            fish_image.loadFromFile(FIRST_TYPE_RIGHT_PATH);
-        } else {
-            fish_image.loadFromFile(FIRST_TYPE_LEFT_PATH);
+
+        fish_texture.loadFromFile(generate_fish_path(f.type, f.destination_right));
+
+        if(f.type == 1){
+            fish_sprite.setTextureRect(sf::IntRect(0, 0, 97, 53));
+        } else if(f.type == 2){
+            fish_sprite.setTextureRect(sf::IntRect(0, 0, 100, 82));
         }
-        fish_texture.loadFromImage(fish_image);
+
         fish_sprite.setTexture(fish_texture);
 
-        fish_sprite.setOrigin(50, 25);
+        auto origin = get_origin(f.type);
+        fish_sprite.setOrigin(origin.first, origin.second);
+
         fish_sprite.setPosition(f.x, f.y);
 
         if(!f.destination_right){
@@ -72,3 +78,63 @@ void show_fish(std::vector<fish>& fishes, RenderWindow& window){
     }
 
 }
+
+void show_planktons(std::vector<plankton>& planktons, RenderWindow& window){
+    Sprite plankton_sprite;
+    Texture plankton_texture;
+    for(auto& p: planktons){
+        if(!p.is_alive){
+            continue;
+        }
+
+        plankton_texture.loadFromFile(generate_plankton_path(p.type, p.destination_right));
+
+        plankton_sprite.setTexture(plankton_texture);
+
+        plankton_sprite.setOrigin(17, 17);
+
+        plankton_sprite.setPosition(p.x, p.y);
+
+        if(!p.destination_right){
+            plankton_sprite.setRotation(-p.angle);
+        } else {
+            plankton_sprite.setRotation(p.angle);
+        }
+        window.draw(plankton_sprite);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
