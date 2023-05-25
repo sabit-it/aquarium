@@ -8,10 +8,10 @@ double distance(double x1, double y1, double x2, double y2) {
     return distance;
 }
 
-double abs(double a){
-    if(a < 0){
-        return -a;
-    }
-    return a;
-}
+//double abs(double a){
+//    if(a < 0){
+//        return -a;
+//    }
+//    return a;
+//}
 

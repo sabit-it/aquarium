@@ -33,3 +33,5 @@ COORD findClosestPointRect(COORD a, COORD b, COORD c, COORD d, COORD p);
 COORD getFishEyeCoord(COORD global_center, COORD inner_eye_coord, float angle, float width, float height);
 
 COORD getClosestFromPoint(COORD rect_center, float rect_width, float rect_height, float global_angle, COORD fish_eye);
+
+void print();

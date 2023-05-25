@@ -2,31 +2,57 @@
 #include "predator.h"
 #include "../../constants/defines.h"
 #include "../../domain/geometry.h"
+#include "../../domain/actionc.h"
 #include <random>
 #include <chrono>
 
 
 bool fish::find_predator(std::vector<predator> &predators) {
     bool predator_find = distance_predator < 1e8;
-    for(int i = 0; i < predators.size(); i++){
-        float cur_distance = distance(x, y, predators[i].x, predators[i].y);
-        if(cur_distance <= FISH_RUN_DISTANCE && cur_distance < distance_predator){
-            if(cur_distance < distance_predator) {
-                predator_find = true;
-                predator_x = predators[i].x;
-                predator_y = predators[i].y;
-                distance_predator = cur_distance;
-            }
+    COORD eye;
+    COORD inner_eye;
+    float width;
+    float height;
+    if(type == 1) {
+        width = FIRST_FISH_WIDTH;
+        height = FIRST_FISH_HEIGHT;
+        if(destination_right) {
+            inner_eye = FIRST_FISH_RIGHT_EYE;
+        } else {
+            inner_eye = FIRST_FISH_LEFT_EYE;
+        }
+    } else {
+        width = SECOND_FISH_WIDTH;
+        height = SECOND_FISH_HEIGHT;
+        if(destination_right){
+            inner_eye = SECOND_FISH_RIGHT_EYE;
+        } else {
+            inner_eye = SECOND_FISH_LEFT_EYE;
         }
     }
-    return predator_find;
+
+    bool is_predator_found = false;
+    eye = getFishEyeCoord({x, y}, inner_eye, angle, width, height);
+    float closest_predator = 1e9;
+
+    for(int i = 0; i < predators.size(); i++) {
+        COORD temp = getClosestFromPoint({predators[i].x, predators[i].y}, PREDATOR_WIDTH, PREDATOR_HEIGHT, predators[i].angle, eye);
+        float temp_distance = findDistanceTwoPoints(temp, eye);
+        if(temp_distance < closest_predator && temp_distance <= FISH_RUN_DISTANCE){
+            is_predator_found = true;
+            predator_x = temp.x;
+            predator_y = temp.y;
+        }
+        std::cout << temp_distance << " " << closest_predator << std::endl;
+    }
+
+    return is_predator_found;
 }
 
 void fish::set_rotation() {
     angle_destination = asin(move_y / FISH_SPEED) * 180 / M_PI;
     angle = angle_destination;
     destination_right = abs(std::asin(move_y / FISH_SPEED) * 180 / M_PI) < 90 && move_x >= 0;
-
 }
 
 void fish::move(std::vector<predator>& predators){

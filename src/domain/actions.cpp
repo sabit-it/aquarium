@@ -72,12 +72,6 @@ COORD findClosestPointLineSegment(COORD a, COORD b, COORD p) {
 
     }
 
-//    COORD perpendicular = {-vectorAToB.y, vectorAToB.x};
-//    COORD q = {p.x + perpendicular.x, p.y+perpendicular.y};
-//    closestPoint.x = ((a.x*b.y-a.y*b.x)*(p.x-q.x) - (a.x-b.x)*(p.x*q.y - p.y*q.x))/((a.x-b.x)*(p.y-q.y)-(a.y-b.y)*(p.y-q.y));
-//    closestPoint.y = ((a.x*b.y-a.y*b.x)*(p.y-q.y) - (a.y-b.y)*(p.x*q.y-p.y*q.x))/((a.x-b.x)*(p.y-q.y)-(a.y-b.y)*(p.y-q.y));
-
-
     float x_max = max(2, a.x, b.x);
     float x_min = min(2, a.x, b.x);
     float y_max = max(2, a.y, b.y);
@@ -163,13 +157,7 @@ COORD getClosestFromPoint(COORD rect_center, float rect_width, float rect_height
     d.x = rect_center.x - delta_x * cos(global_angle * M_PI / 180) - delta_y * sin(global_angle * M_PI / 180);
     d.y = rect_center.y - delta_x * sin(global_angle * M_PI / 180) + delta_y * cos(global_angle * M_PI / 180);
 
-    printf("Coord a: x=%.2f; y=%.2f\n", a.x, a.y);
-    printf("Coord b: x=%.2f; y=%.2f\n", b.x, b.y);
-    printf("Coord c: x=%.2f; y=%.2f\n", c.x, c.y);
-    printf("Coord d: x=%.2f; y=%.2f\n", d.x, d.y);
-
     COORD result = findClosestPointRect(a, b, c, d, fish_eye);
-    printf("\n\nX: %.2f | Y:%.2f\n\n", result.x, result.y);
 
 
     return result;

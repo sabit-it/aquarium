@@ -91,7 +91,7 @@ void show_planktons(std::vector<plankton>& planktons, RenderWindow& window){
 
         plankton_sprite.setTexture(plankton_texture);
 
-        plankton_sprite.setOrigin(20, 20);
+        plankton_sprite.setOrigin(PLANKTON_CENTER);
 
         plankton_sprite.setPosition(p.x, p.y);
 
