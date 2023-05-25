@@ -6,6 +6,7 @@
 #include <random>
 #include <vector>
 #include <string>
+#include "../../domain/actionc.h"
 
 struct predator;
 
@@ -26,7 +27,18 @@ struct fish {
             std::uniform_int_distribution<> fish_type(1, 2);
             type = fish_type(gen);
         }
+
+        if(type == 1) {
+            width = FIRST_FISH_WIDTH;
+            height = FIRST_FISH_HEIGHT;
+        } else {
+            width = SECOND_FISH_WIDTH;
+            height = SECOND_FISH_HEIGHT;
+        }
     }
+
+    COORD eye_cord;
+    COORD inner_eye;
 
     int path_count = 0;
 
@@ -37,11 +49,15 @@ struct fish {
 
     int type = 1;
 
+    float width;
+    float height;
 
     float predator_x = 0;
     float predator_y = 0;
     float distance_predator = 1e9;
 
+    float closest_predator_x;
+    float closest_predator_y;
     float move_x = 0;
     float move_y = 0;
 
@@ -51,17 +67,21 @@ struct fish {
     bool destination_right = true;
 
     bool is_alive = true;
-
+    bool predator_found = false;
+    bool is_first = true;
 
     std::chrono::time_point<std::chrono::steady_clock> start;
+    std::chrono::time_point<std::chrono::steady_clock> start_run;
     std::chrono::time_point<std::chrono::steady_clock> life_start;
 
-
+    bool found_close_predator = false;
     bool find_predator(std::vector<predator>& predators);
 
     void move(std::vector<predator>& predators);
 
     void set_rotation();
+
+    void run_set_rotation();
 
 };
 
