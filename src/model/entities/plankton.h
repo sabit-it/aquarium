@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "fish.h"
-#include "../additionaly_functionality/deleting.h"
+#include "../../domain/deleting.h"
 #include "../../constants/defines.h"
 
 struct plankton {

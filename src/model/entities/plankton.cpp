@@ -1,8 +1,6 @@
 #include "plankton.h"
 
 void plankton::set_rotation() {
-    angle_destination = asin((move_y / PLANKTON_SPEED) * 180 / M_PI);
-    angle = angle_destination;
     destination_right = abs(std::asin(move_y / PLANKTON_SPEED) * 180 / M_PI) < 90 && move_x >= 0;
 }
 
@@ -32,7 +30,6 @@ void plankton::move(){
             }
 
             destination_right = abs(std::asin(move_y / PLANKTON_SPEED) * 180 / M_PI) < 90 && move_x >= 0;
-            angle_destination = asin(move_y / PLANKTON_SPEED) * 180 / M_PI;
 
         } else {
             x += move_x;

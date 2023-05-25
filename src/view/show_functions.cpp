@@ -1,6 +1,6 @@
 #include "../model/entities/fish.h"
 #include "../model/entities/predator.h"
-#include "../model/additionaly_functionality/path_generate.h"
+#include "../domain/path_generate.h"
 #include "show_functions.h"
 #include <SFML/Graphics.hpp>
 
@@ -87,19 +87,14 @@ void show_planktons(std::vector<plankton>& planktons, RenderWindow& window){
             continue;
         }
 
-        plankton_texture.loadFromFile(generate_plankton_path(p.type, p.destination_right));
+        plankton_texture.loadFromFile(SPRITES_PATH + "plankton.png");
 
         plankton_sprite.setTexture(plankton_texture);
 
-        plankton_sprite.setOrigin(17, 17);
+        plankton_sprite.setOrigin(20, 20);
 
         plankton_sprite.setPosition(p.x, p.y);
 
-        if(!p.destination_right){
-            plankton_sprite.setRotation(-p.angle);
-        } else {
-            plankton_sprite.setRotation(p.angle);
-        }
         window.draw(plankton_sprite);
     }
 

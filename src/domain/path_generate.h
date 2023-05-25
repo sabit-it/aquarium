@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../constants/defines.h"
+#include "../constants/defines.h"
 #include <string>
 #include <algorithm>
 using namespace std::literals::string_literals;

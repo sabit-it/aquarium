@@ -3,12 +3,12 @@
 #include <thread>
 #include "src/model/entities/predator.h"
 #include "src/view/show_functions.h"
-#include "src/model/additionaly_functionality/adding.h"
+#include "src/domain/adding.h"
 #include "src/model/entities/plankton.h"
 
 int main() {
     std::vector<fish> fishes(10);
-    std::vector<predator> predators;
+    std::vector<predator> predators(2);
     std::vector<plankton> planktons(10);
     int count = 0;
 

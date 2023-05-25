@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../entities/fish.h"
-#include "../entities/plankton.h"
-#include "../entities/predator.h"
+#include "../model/entities/fish.h"
+#include "../model/entities/plankton.h"
+#include "../model/entities/predator.h"
 
 template<typename T>
 std::vector<int> get_dead_animal(std::vector<T>& animals){
