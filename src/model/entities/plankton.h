@@ -9,9 +9,11 @@
 struct plankton {
     plankton(int cur_x = -1, int cur_y = -1){
         if(cur_x == -1 && cur_y == -1){
-            life_start = std::chrono::steady_clock::now();
             std::random_device rd;
             std::mt19937 gen(rd());
+            life_start = std::chrono::steady_clock::now();
+            std::uniform_int_distribution<> life(-20000, 20000);
+            additional_life = life(gen);
 
             std::uniform_int_distribution<> dis(100, 1720);
             x = dis(gen);
@@ -23,6 +25,7 @@ struct plankton {
     float x, y;
     float move_x, move_y;
 
+    long long additional_life;
     int type = 1;
 
     int path_count;

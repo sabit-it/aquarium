@@ -6,7 +6,7 @@ void plankton::set_rotation() {
 
 
 void plankton::move(){
-    if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - life_start).count() > PLANKTON_LIFE_TIME){
+    if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - life_start).count() > PLANKTON_LIFE_TIME + additional_life){
         is_alive = false;
         x = -100;
         y = -100;

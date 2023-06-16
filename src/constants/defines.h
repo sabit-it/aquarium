@@ -16,7 +16,7 @@
 #define BACKGROUND_PATH "/home/sabit/Рабочий стол/aquarium_decompostion/resources/background.png"
 #define MIN_FISH_COUNT 16
 #define MIN_PREDATOR_COUNT 2
-#define MIN_PLANKTON_COUNT 100
+#define MIN_PLANKTON_COUNT 80
 #define FISH_LIFE_TIME 80000
 #define PREDATOR_LIFE_TIME 100000
 #define PLANKTON_LIFE_TIME 40000
