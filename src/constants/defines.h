@@ -7,7 +7,7 @@
 #define PLANKTON_SPEED 2
 #define FISH_RUN_DISTANCE 150
 #define PREDATOR_HUNT_DISTANCE 250
-#define WIDTH 1980
+#define WIDTH 1920
 #define HEIGHT 1080
 #define SPRITES_PATH "/home/sabit/Рабочий стол/aquarium_decompostion/resources/"s
 
@@ -15,8 +15,8 @@
 #define FIRST_TYPE_PREDATOR_LEFT "/home/sabit/Рабочий стол/aquarium_decompostion/resources/first_type_predator_left.png"
 #define BACKGROUND_PATH "/home/sabit/Рабочий стол/aquarium_decompostion/resources/background.png"
 #define MIN_FISH_COUNT 16
-#define MIN_PREDATOR_COUNT 2
-#define MIN_PLANKTON_COUNT 80
+#define MIN_PREDATOR_COUNT 4
+#define MIN_PLANKTON_COUNT 100
 #define FISH_LIFE_TIME 80000
 #define PREDATOR_LIFE_TIME 100000
 #define PLANKTON_LIFE_TIME 40000

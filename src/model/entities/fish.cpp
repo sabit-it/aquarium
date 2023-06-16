@@ -242,7 +242,7 @@ bool fish::find_plankton(std::vector<plankton>& planktons){
     for(int i = 0; i < planktons.size(); i++){
         COORD temp = {planktons[i].x, planktons[i].y};
         float temp_distance = findDistanceTwoPoints(temp, eye_cord);
-        if(temp_distance < closest_prey && temp_distance <= 20){
+        if(temp_distance < closest_prey && temp_distance <= 30){
             is_prey_found = true;
             prey = &planktons[i];
         }
