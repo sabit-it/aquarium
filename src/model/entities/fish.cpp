@@ -20,7 +20,6 @@ bool fish::find_predator(std::vector<predator> &predators) {
             is_predator_found = true;
             predator_x = temp.x;
             predator_y = temp.y;
-//            std::cout << predator_x << " " << predator_y << std::endl;
         } else if(temp_distance < closest_predator && temp_distance <= 200){
             distance_predator = temp_distance;
             closest_predator_x = temp.x;
@@ -43,10 +42,9 @@ void fish::run_set_rotation() {
     angle_destination = asin(move_y / FISH_RUN_SPEED) * 180 / M_PI;
     angle = angle_destination;
     destination_right = abs(std::asin(move_y / FISH_RUN_SPEED) * 180 / M_PI) < 90 && move_x >= 0;
-//    std::cout << angle << std::endl;
 }
 
-void fish::move(std::vector<predator>& predators){
+void fish::move(std::vector<predator>& predators, std::vector<plankton>& planktons){
 
     {
         COORD eye;
@@ -68,8 +66,7 @@ void fish::move(std::vector<predator>& predators){
         eye_cord = eye;
     }
 
-
-    if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - life_start).count() > FISH_LIFE_TIME || hungry_level <= 0){
+    if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - life_start).count() > FISH_LIFE_TIME + fish_additional_life || hungry_level <= 0){
         is_alive = false;
         x = -100;
         y = -100;
@@ -149,6 +146,16 @@ void fish::move(std::vector<predator>& predators){
         }
 
     } else {
+        hungry_level -= 0.05;
+
+        found_close_prey = find_plankton(planktons);
+        if(hungry_level <= 70 && found_close_prey){
+            prey->is_alive = false;
+            hungry_level += 25;
+            found_close_prey = false;
+            prey = nullptr;
+        }
+
         is_first = true;
         bool go_ = false;
         if(predator_found){
@@ -156,10 +163,9 @@ void fish::move(std::vector<predator>& predators){
             go_ = true;
         }
         auto current_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
+        std::uniform_int_distribution<> dis(2000, 10000);
         std::random_device rd;
         std::mt19937 gen(rd());
-        std::uniform_int_distribution<> dis(2000, 10000);
-
         if(current_time > dis(gen) || go_) {
 
             distance_predator = 1e9;
@@ -219,10 +225,28 @@ void fish::move(std::vector<predator>& predators){
     }
 }
 
-void move_fishes(std::vector<fish>& fishes, std::vector<predator>& p){
+void move_fishes(std::vector<fish>& fishes, std::vector<predator>& predators, std::vector<plankton>& planktons){
     for(auto& f: fishes){
         if(f.is_alive){
-            f.move(p);
+            f.move(predators, planktons);
         }
     }
+}
+
+bool fish::find_plankton(std::vector<plankton>& planktons){
+    bool is_prey_found = false;
+    eye_cord = getFishEyeCoord({x, y}, inner_eye, angle, width, height);
+    float closest_prey = 1e9;
+    found_close_prey = false;
+
+    for(int i = 0; i < planktons.size(); i++){
+        COORD temp = {planktons[i].x, planktons[i].y};
+        float temp_distance = findDistanceTwoPoints(temp, eye_cord);
+        if(temp_distance < closest_prey && temp_distance <= 20){
+            is_prey_found = true;
+            prey = &planktons[i];
+        }
+    }
+
+    return is_prey_found;
 }

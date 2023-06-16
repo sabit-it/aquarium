@@ -1,14 +1,18 @@
 #pragma once
 
 #include "predator.h"
+#include "plankton.h"
 #include "../../constants/defines.h"
+#include "../../domain/actionc.h"
+#include "plankton.h"
 #include <chrono>
 #include <random>
 #include <vector>
 #include <string>
-#include "../../domain/actionc.h"
 
 struct predator;
+
+struct plankton;
 
 struct fish {
 
@@ -17,8 +21,9 @@ struct fish {
             life_start = std::chrono::steady_clock::now();
             std::random_device rd;
             std::mt19937 gen(rd());
-
             std::uniform_int_distribution<> dis(100, 1720);
+            std::uniform_int_distribution<> life(-20000, 20000);
+            fish_additional_life = life(gen);
             x = dis(gen);
 
             std::uniform_int_distribution<> dis_y(100, 780);
@@ -37,16 +42,21 @@ struct fish {
         }
     }
 
+    plankton* prey = nullptr;
+
+    bool hunt = false;
+    bool found_close_prey = false;
+
     COORD eye_cord;
     COORD inner_eye;
 
     int path_count = 0;
 
-    float hungry_level = 60;
+    float hungry_level = 40;
     int age = 0;
     float x, y;
 
-
+    long long fish_additional_life;
     int type = 1;
 
     float width;
@@ -77,12 +87,14 @@ struct fish {
     bool found_close_predator = false;
     bool find_predator(std::vector<predator>& predators);
 
-    void move(std::vector<predator>& predators);
+    void move(std::vector<predator>& predators, std::vector<plankton>& planktons);
 
     void set_rotation();
 
     void run_set_rotation();
 
+    bool find_plankton(std::vector<plankton>& planktons);
+
 };
 
-void move_fishes(std::vector<fish>& fishes, std::vector<predator>& p);
+void move_fishes(std::vector<fish>& fishes, std::vector<predator>& p, std::vector<plankton>& planktons);

@@ -3,11 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "actionc.h"
-
+#include "../constants/defines.h"
 
 
 float dot_product(COORD a, COORD b) {
     float result = a.x * b.x + a.y * b.y;
+    return result;
 }
 
 
@@ -161,5 +162,29 @@ COORD getClosestFromPoint(COORD rect_center, float rect_width, float rect_height
 
 
     return result;
+}
+
+float angle_between_two_coordinates(COORD coord1, COORD coord2) {
+    VECT vect1, vect2;
+
+    float delta_x, delta_y, angle;
+    delta_x = coord1.x - coord2.x;
+    delta_y = coord1.y - coord2.y;
+    vect1.i = delta_x;
+    vect1.j = delta_y;
+    vect2.i = delta_x;
+    vect2.j = 0;
+
+    angle = ANGLE_BY_DOT_PRODUCT(vect1, vect2);
+
+    if (delta_x > 0 && delta_y < 0) {
+        angle = -1;
+    } else if (delta_x < 0 && delta_y < 0) {
+        angle = (180 - angle)*(-1);
+    } else if (delta_x < 0 && delta_y > 0) {
+        angle = 180 - angle;
+    }
+
+    return angle;
 }
 

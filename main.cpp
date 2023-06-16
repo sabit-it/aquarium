@@ -5,11 +5,11 @@
 #include "src/view/show_functions.h"
 #include "src/domain/adding.h"
 #include "src/model/entities/plankton.h"
-
+#include "src/domain/deleting.h"
 int main() {
-    std::vector<fish> fishes(10);
+    std::vector<fish> fishes(16);
     std::vector<predator> predators(2);
-    std::vector<plankton> planktons(10);
+    std::vector<plankton> planktons(80);
     int count = 0;
 
     RenderWindow window(VideoMode(WIDTH, HEIGHT), "Aquarium");
@@ -33,7 +33,7 @@ int main() {
 
         show_background(window, sprite);
         show_fish(fishes, window);
-        move_fishes(fishes, predators);
+        move_fishes(fishes, predators, planktons);
         show_predators(predators, window);
         move_predators(predators, fishes);
         show_planktons(planktons, window);
@@ -43,9 +43,15 @@ int main() {
         window.display();
         if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count() / 5000 > count) {
             count++;
-//            add_fish(temp);
-//            add_predator(pr);
+            add_fish(fishes);
+            add_predator(predators);
         }
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count() / 1000 > count) {
+            add_plankton(planktons);
+        }
+        delete_fishes(fishes);
+        delete_planktons(planktons);
+        delete_predator(predators);
     }
 
     return 0;

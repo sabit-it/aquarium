@@ -10,6 +10,11 @@ typedef struct coordinate {
     float x, y;
 } COORD;
 
+typedef struct c_vector{
+    float i,j;
+} VECT;
+
+
 float dot_product(COORD a, COORD b);
 
 
@@ -35,3 +40,5 @@ COORD getFishEyeCoord(COORD global_center, COORD inner_eye_coord, float angle, f
 COORD getClosestFromPoint(COORD rect_center, float rect_width, float rect_height, float global_angle, COORD fish_eye);
 
 void print();
+
+float angle_between_two_coordinates(COORD coord1, COORD coord2);

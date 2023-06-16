@@ -1,8 +1,10 @@
 #pragma once
 #include <string>
 #include "fish.h"
-#include "../../domain/deleting.h"
+//#include "../../domain/deleting.h"
 #include "../../constants/defines.h"
+#include <chrono>
+#include <random>
 
 struct plankton {
     plankton(int cur_x = -1, int cur_y = -1){
