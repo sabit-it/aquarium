@@ -7,8 +7,8 @@
 #include "src/model/entities/plankton.h"
 #include "src/domain/deleting.h"
 int main() {
-    std::vector<fish> fishes(16);
-    std::vector<predator> predators(2);
+    std::vector<fish> fishes(10);
+    std::vector<predator> predators;
     std::vector<plankton> planktons(80);
     int count = 0;
 

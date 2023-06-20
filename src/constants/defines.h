@@ -3,17 +3,17 @@
 #define FISH_SPEED 5
 #define FISH_RUN_SPEED 10
 #define PREDATOR_SPEED 7
-#define PREDATOR_HUNT_SPEED 12
+#define PREDATOR_HUNT_SPEED 15
 #define PLANKTON_SPEED 2
 #define FISH_RUN_DISTANCE 150
 #define PREDATOR_HUNT_DISTANCE 250
 #define WIDTH 1920
 #define HEIGHT 1080
-#define SPRITES_PATH "/home/sabit/Рабочий стол/aquarium_decompostion/resources/"s
+#define SPRITES_PATH "/home/sabit/Рабочий стол/C++/aquarium_decompostion/resources/"s
 
-#define FIRST_TYPE_PREDATOR_RIGHT "/home/sabit/Рабочий стол/aquarium_decompostion/resources/first_type_predator_right.png"
-#define FIRST_TYPE_PREDATOR_LEFT "/home/sabit/Рабочий стол/aquarium_decompostion/resources/first_type_predator_left.png"
-#define BACKGROUND_PATH "/home/sabit/Рабочий стол/aquarium_decompostion/resources/background.png"
+#define FIRST_TYPE_PREDATOR_RIGHT "/home/sabit/Рабочий стол/C++/aquarium_decompostion/resources/first_type_predator_right.png"
+#define FIRST_TYPE_PREDATOR_LEFT "/home/sabit/Рабочий стол/C++/aquarium_decompostion/resources/first_type_predator_left.png"
+#define BACKGROUND_PATH "/home/sabit/Рабочий стол/C++/aquarium_decompostion/resources/background.png"
 #define MIN_FISH_COUNT 16
 #define MIN_PREDATOR_COUNT 4
 #define MIN_PLANKTON_COUNT 100

@@ -14,9 +14,6 @@ void move_predators(std::vector<predator>& predators, std::vector<fish>& fishes)
         if(pr.is_alive) {
             pr.move(fishes);
         }
-        if(!pr.is_alive){
-            std::cout << "\nno";
-        }
     }
 }
 
@@ -63,7 +60,6 @@ void predator::move(std::vector<fish> &fishes) {
     }
 
     if((hungry_level >= 30 && !hunt) || (hunt && !found_close_prey)){
-        std::cout << "here\n\n\n\n" << std::endl;
         auto current_time = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start).count();
         std::random_device rd;
         std::mt19937 gen(rd());
@@ -119,7 +115,6 @@ void predator::move(std::vector<fish> &fishes) {
             prey = nullptr;
         };
 
-        std::cout << eye_cord.x << " " << eye_cord.y << " " << closest_point.x << " " << closest_point.y << std::endl;
         float angle_from_prey = angle_between_two_coordinates(closest_point, eye_cord);
         move_x = cos(angle_from_prey * M_PI / 180) * speed;
         move_y = sin(angle_from_prey * M_PI / 180) * speed;
@@ -138,9 +133,10 @@ bool predator::find_fish(std::vector<fish> &fishes) {
     for(int i = 0; i < fishes.size(); i++){
         COORD temp = getClosestFromPoint({fishes[i].x, fishes[i].y}, fishes[i].width, fishes[i].height, fishes[i].angle, eye_cord);
         float temp_distance = findDistanceTwoPoints(temp, eye_cord);
-        if(temp_distance < closest_prey && temp_distance <= PREDATOR_HUNT_DISTANCE){
+        if(temp_distance < closest_prey && temp_distance <= PREDATOR_HUNT_DISTANCE && !fishes[i].is_hunted){
             is_prey_found = true;
             prey = &fishes[i];
+            fishes[i].is_hunted = true;
         }
     }
 

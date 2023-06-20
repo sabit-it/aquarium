@@ -23,7 +23,6 @@ struct predator {
 
             std::uniform_int_distribution<> dis_y(100, HEIGHT - 200);
             y = dis_y(gen);
-            std::cout << x << " " << y << std::endl;
         }
     }
 
@@ -40,7 +39,7 @@ struct predator {
 
 
 
-    float hungry_level = 60;
+    float hungry_level = 31;
     float x = 0, y = 0;
     float direction = 0;
     int speed = PREDATOR_SPEED;

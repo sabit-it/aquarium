@@ -79,6 +79,7 @@ struct fish {
     bool is_alive = true;
     bool predator_found = false;
     bool is_first = true;
+    bool is_hunted = false;
 
     std::chrono::time_point<std::chrono::steady_clock> start;
     std::chrono::time_point<std::chrono::steady_clock> start_run;
